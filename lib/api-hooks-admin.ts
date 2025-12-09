@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { auth } from './auth';
 
 interface ProgramData {
@@ -255,6 +255,34 @@ export const useDeletePartner = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['partners'] });
+        },
+    });
+};
+
+// Contact Messages
+export interface ContactMessage {
+    id: number;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    createdAt: string;
+    read?: boolean;
+}
+
+export const useContactMessages = () => {
+    const token = auth.getToken();
+
+    return useQuery({
+        queryKey: ['contact-messages'],
+        queryFn: async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/contact`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (!response.ok) throw new Error('Failed to fetch messages');
+            return response.json();
         },
     });
 };
