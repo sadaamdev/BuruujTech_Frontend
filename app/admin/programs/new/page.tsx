@@ -34,7 +34,6 @@ export default function CreateProgramPage() {
         resolver: zodResolver(programSchema),
     });
 
-    const title = watch("title");
     const imageUrl = watch("image");
 
     // Auto-generate slug from title

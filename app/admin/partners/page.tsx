@@ -22,13 +22,20 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+interface Partner {
+    id: number;
+    name: string;
+    logoUrl: string;
+    website?: string;
+}
+
 export default function PartnersPage() {
     const { data: partners, isLoading } = usePartners();
     const createMutation = useCreatePartner();
     const deleteMutation = useDeletePartner();
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const [showForm, setShowForm] = useState(false);
-    const [editingItem, setEditingItem] = useState<any>(null);
+    const [editingItem, setEditingItem] = useState<Partner | null>(null);
     const [formData, setFormData] = useState({
         name: "",
         logoUrl: "",
@@ -47,7 +54,7 @@ export default function PartnersPage() {
         }
     };
 
-    const handleEdit = (partner: any) => {
+    const handleEdit = (partner: Partner) => {
         setEditingItem(partner);
         setFormData({
             name: partner.name,
@@ -137,7 +144,7 @@ export default function PartnersPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    {partners?.map((partner: any) => (
+                    {partners?.map((partner: Partner) => (
                         <Card key={partner.id}>
                             <CardContent className="p-4">
                                 <div className="flex flex-col items-center space-y-2">

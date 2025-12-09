@@ -37,8 +37,9 @@ export default function AdminLoginPage() {
 
             // Redirect to admin dashboard
             router.push("/admin");
-        } catch (err: any) {
-            setError(err.response?.data?.message || "Invalid email or password");
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Invalid email or password";
+            setError(errorMessage);
         }
     };
 

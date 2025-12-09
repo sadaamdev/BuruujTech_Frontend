@@ -20,13 +20,20 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+interface ProgramItem {
+    id: string;
+    title: string;
+    slug: string;
+    shortDescription: string;
+}
+
 export default function ProgramsListPage() {
     const { data: programs, isLoading } = usePrograms();
     const deleteMutation = useDeleteProgram();
     const [searchTerm, setSearchTerm] = useState("");
     const [deleteSlug, setDeleteSlug] = useState<string | null>(null);
 
-    const filteredPrograms = programs?.filter((prog: any) =>
+    const filteredPrograms = programs?.filter((prog: ProgramItem) =>
         prog.title.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
@@ -78,7 +85,7 @@ export default function ProgramsListPage() {
                 </div>
             ) : (
                 <div className="grid gap-4">
-                    {filteredPrograms.map((program: any) => (
+                    {filteredPrograms.map((program: ProgramItem) => (
                         <Card key={program.id}>
                             <CardHeader>
                                 <div className="flex justify-between items-start">

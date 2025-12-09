@@ -2,10 +2,10 @@
 
 import { usePrograms, useNews, useGallery, usePartners } from "@/lib/api-hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Newspaper, Image as ImageIcon, Users, Loader2 } from "lucide-react";
+import { BookOpen, Newspaper, Image as ImageIcon, Users } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-function StatCard({ title, value, icon: Icon, isLoading }: { title: string; value: number; icon: any; isLoading: boolean }) {
+function StatCard({ title, value, icon: Icon, isLoading }: { title: string; value: number; icon: React.ElementType; isLoading: boolean }) {
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

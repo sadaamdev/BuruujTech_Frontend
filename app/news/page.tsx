@@ -2,9 +2,18 @@
 
 import { PageHeader } from "@/components/page-header";
 import { BlogCard } from "@/components/blog-card";
-import { Button } from "@/components/ui/button";
+
 import { useNews } from "@/lib/api-hooks";
 import { BlogCardSkeleton } from "@/components/skeletons";
+
+interface NewsItem {
+    title: string;
+    slug: string;
+    excerpt: string;
+    published: boolean;
+    createdAt: string;
+    image?: string;
+}
 
 export default function NewsPage() {
     const { data: news, isLoading, isError } = useNews();
@@ -35,7 +44,7 @@ export default function NewsPage() {
                     {!isLoading && !isError && (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                                {news?.filter((post: any) => post.published).map((newsItem: any) => (
+                                {news?.filter((post: NewsItem) => post.published).map((newsItem: NewsItem) => (
                                     <BlogCard
                                         key={newsItem.slug}
                                         title={newsItem.title}

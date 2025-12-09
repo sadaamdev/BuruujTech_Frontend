@@ -36,7 +36,7 @@ export default function CreateNewsPage() {
         resolver: zodResolver(newsSchema),
     });
 
-    const title = watch("title");
+
 
     const generateSlug = (title: string) => {
         return title

@@ -24,7 +24,7 @@ export default function ProgramDetailClient({ slug }: { slug: string }) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center">
                 <h1 className="text-3xl font-bold mb-4">Program Not Found</h1>
-                <p className="text-muted-foreground mb-8">The program you're looking for doesn't exist.</p>
+                <p className="text-muted-foreground mb-8">The program you&apos;re looking for doesn&apos;t exist.</p>
                 <Button asChild>
                     <Link href="/programs">
                         <ArrowLeft className="mr-2 h-4 w-4" />

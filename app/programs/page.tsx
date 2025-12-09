@@ -8,11 +8,18 @@ import { Search } from "lucide-react";
 import { usePrograms } from "@/lib/api-hooks";
 import { ProgramCardSkeleton } from "@/components/skeletons";
 
+interface ProgramItem {
+    title: string;
+    slug: string;
+    shortDescription: string;
+    image?: string;
+}
+
 export default function ProgramsPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const { data: programs, isLoading, isError } = usePrograms();
 
-    const filteredPrograms = programs?.filter((prog: any) =>
+    const filteredPrograms = programs?.filter((prog: ProgramItem) =>
         prog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         prog.shortDescription.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
@@ -53,7 +60,7 @@ export default function ProgramsPage() {
                     {!isLoading && !isError && (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {filteredPrograms.map((program: any) => (
+                                {filteredPrograms.map((program: ProgramItem) => (
                                     <ProgramCard key={program.slug} {...program} />
                                 ))}
                             </div>

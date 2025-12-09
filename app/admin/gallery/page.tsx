@@ -22,13 +22,20 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+interface GalleryItem {
+    id: number;
+    title: string;
+    imageUrl: string;
+    category?: string;
+}
+
 export default function GalleryPage() {
     const { data: gallery, isLoading } = useGallery();
     const createMutation = useCreateGalleryItem();
     const deleteMutation = useDeleteGalleryItem();
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const [showForm, setShowForm] = useState(false);
-    const [editingItem, setEditingItem] = useState<any>(null);
+    const [editingItem, setEditingItem] = useState<GalleryItem | null>(null);
     const [formData, setFormData] = useState({
         title: "",
         imageUrl: "",
@@ -47,7 +54,7 @@ export default function GalleryPage() {
         }
     };
 
-    const handleEdit = (item: any) => {
+    const handleEdit = (item: GalleryItem) => {
         setEditingItem(item);
         setFormData({
             title: item.title,
@@ -137,7 +144,7 @@ export default function GalleryPage() {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {gallery?.map((item: any) => (
+                    {gallery?.map((item: GalleryItem) => (
                         <Card key={item.id} className="overflow-hidden">
                             <div className="relative h-48">
                                 <Image

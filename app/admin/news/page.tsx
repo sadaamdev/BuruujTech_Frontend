@@ -21,13 +21,23 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+interface NewsItem {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    published: boolean;
+    createdAt: string;
+    image?: string;
+}
+
 export default function NewsListPage() {
     const { data: news, isLoading } = useNews();
     const deleteMutation = useDeleteNews();
     const [searchTerm, setSearchTerm] = useState("");
     const [deleteSlug, setDeleteSlug] = useState<string | null>(null);
 
-    const filteredNews = news?.filter((post: any) =>
+    const filteredNews = news?.filter((post: NewsItem) =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
@@ -79,7 +89,7 @@ export default function NewsListPage() {
                 </div>
             ) : (
                 <div className="grid gap-4">
-                    {filteredNews.map((post: any) => (
+                    {filteredNews.map((post: NewsItem) => (
                         <Card key={post.id}>
                             <CardHeader>
                                 <div className="flex justify-between items-start">

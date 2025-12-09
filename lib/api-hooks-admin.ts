@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from './api-hooks';
 import { auth } from './auth';
 
 // Programs
