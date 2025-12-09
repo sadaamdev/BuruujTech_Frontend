@@ -1,23 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from './api-hooks';
 import { auth } from './auth';
-
-// Get API instance with auth token
-const getAuthApi = () => {
-    const token = auth.getToken();
-    return {
-        ...api,
-        defaults: {
-            ...api.defaults,
-            headers: {
-                ...api.defaults.headers,
-                Authorization: token ? `Bearer ${token}` : '',
-            },
-        },
-    };
-};
 
 // Programs
 export const useCreateProgram = () => {

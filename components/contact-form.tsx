@@ -109,7 +109,7 @@ export function ContactForm() {
                 {contactMutation.isSuccess && (
                     <div className="flex items-center text-green-600 bg-green-50 p-3 rounded-md">
                         <CheckCircle2 className="h-5 w-5 mr-2" />
-                        Message sent successfully! We'll get back to you soon.
+                        Message sent successfully! We&apos;ll get back to you soon.
                     </div>
                 )}
 
