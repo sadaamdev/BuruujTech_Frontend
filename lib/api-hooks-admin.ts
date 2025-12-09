@@ -1,13 +1,43 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { auth } from './auth';
 
+interface ProgramData {
+    title: string;
+    slug: string;
+    shortDescription: string;
+    fullDescription: string;
+    image?: string;
+    requirements?: string[];
+}
+
+interface NewsData {
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    image?: string;
+    published?: boolean;
+}
+
+interface GalleryData {
+    title: string;
+    imageUrl: string;
+    category?: string;
+}
+
+interface PartnerData {
+    name: string;
+    logoUrl: string;
+    website?: string;
+}
+
 // Programs
 export const useCreateProgram = () => {
     const queryClient = useQueryClient();
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: ProgramData) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/programs`, {
                 method: 'POST',
                 headers: {
@@ -30,7 +60,7 @@ export const useUpdateProgram = (slug: string) => {
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: Partial<ProgramData>) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/programs/${slug}`, {
                 method: 'PATCH',
                 headers: {
@@ -76,7 +106,7 @@ export const useCreateNews = () => {
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: NewsData) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/news`, {
                 method: 'POST',
                 headers: {
@@ -99,7 +129,7 @@ export const useUpdateNews = (slug: string) => {
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: Partial<NewsData>) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/news/${slug}`, {
                 method: 'PATCH',
                 headers: {
@@ -145,7 +175,7 @@ export const useCreateGalleryItem = () => {
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: GalleryData) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/gallery`, {
                 method: 'POST',
                 headers: {
@@ -190,7 +220,7 @@ export const useCreatePartner = () => {
     const token = auth.getToken();
 
     return useMutation({
-        mutationFn: async (data: any) => {
+        mutationFn: async (data: PartnerData) => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'}/partners`, {
                 method: 'POST',
                 headers: {

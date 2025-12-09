@@ -18,7 +18,7 @@ export default function GalleryPage() {
     };
 
     // Transform gallery items to lightbox format
-    const lightboxImages = galleryItems?.map((item: any) => ({
+    const lightboxImages = galleryItems?.map((item: { imageUrl: string; title?: string }) => ({
         src: item.imageUrl,
         alt: item.title || 'Gallery Image'
     })) || [];
@@ -48,7 +48,7 @@ export default function GalleryPage() {
                         <>
                             {galleryItems && galleryItems.length > 0 ? (
                                 <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-                                    {galleryItems.map((item: any, index: number) => (
+                                    {galleryItems.map((item: { id: number; imageUrl: string; title?: string; category?: string }, index: number) => (
                                         <div
                                             key={item.id}
                                             className="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl"
